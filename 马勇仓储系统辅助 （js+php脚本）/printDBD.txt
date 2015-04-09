@@ -1,0 +1,200 @@
+           <html> 
+
+           <head>
+
+           </head>
+
+           <body> 
+
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <td align="center" valign="top">
+ 
+                            <table id="bill_main_table" cellspacing="0" class="x_bill_print_main_table" width="100%">
+                                <tr>
+                                    <td class="x_bill_print_title_text">
+                                    <button type="button" onclick="conf()"> 调  拨  单</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table cellspacing="0" class="x_bill_print_body_table1">
+                                            <tr>
+                                                <td id="label_date" class="x_bill_print_body_title_td_1">
+                                                    领料日期:</td>
+                                                <td id="date" class="x_bill_print_body_title_td_1">
+                                                    $llrq</td>
+                                                <td id="label_dbd_No" class="x_bill_print_body_title_td_1">
+                                                    调拨单号:</td>
+                                                <td id="dbd_No" class="x_bill_print_body_title_td_1">
+                                                    $bh</td>
+                                            </tr>
+                                            <tr>
+                                                <td id="lldw" class="x_bill_print_body_title_td_1">
+                                                    领料单位:</td>
+                                                <td id="lldw_value" class="x_bill_print_body_title_td_1">
+                                                    $lldw</td>
+                                                <td class="x_bill_print_body_title_td_1">
+                                               
+                                                    </td>
+                                                <td class="x_bill_print_body_title_td_1">
+                                                
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                <td  class="x_bill_print_body_title_td_1">
+                                                    施工地点:</td>
+                                                <td id="sgdd_value" class="x_bill_print_body_title_td_1">
+                                                    $sgdd</td>
+                                                <td class="x_bill_print_body_title_td_1">
+                                                    施工原因:</td>
+                                                <td id="sgyy_value" class="x_bill_print_body_title_td_1">
+                                                    $sgyy</td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id="dbdsubs">
+                                    $dbdsubs
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table cellspacing="0" class="x_bill_print_footer_table">
+                                        
+                                           
+                                            <tr>
+                                                <td id="dby" align="left" class="x_bill_print_footer_td">
+                                                    调 拨 员：$dby</td>
+                                                <td align="left" class="x_bill_print_footer_td">
+                                                    保 管 员： </td>   
+                                                <td id="llr" align="left" class="x_bill_print_footer_td">
+                                                    领 料 人：$llrr</td>                                              
+                                            </tr>
+                                                   <tr>
+                                               <td class="x_bill_print_footer_td">调拨单位：$dbdw</td>
+                                                <td align="left" class="x_bill_print_footer_td" colspan="2">
+                                                    备    注: $bz</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <script type="text/javascript" charset="utf-8">
+
+
+                                    function conf(){
+                                        if(confirm("确定要将这里的数据存入数据吗？")){
+                                            f();
+                                        }
+
+                                    }
+
+                                    function f(){
+
+
+                                            function htmlEscape(str) {
+                                                return String(str)
+                                                        .replace(/&/g, '&amp;')
+                                                        .replace(/"/g, '&quot;')
+                                                        .replace(/'/g, '&#39;')
+                                                        .replace(/</g, '&lt;')
+                                                        .replace(/>/g, '&gt;');
+                                            }
+
+                                            // implement JSON.stringify serialization
+                                            var JSON={};
+                                            JSON.stringify = JSON.stringify || function (obj) {
+                                                var t = typeof (obj);
+                                                if (t != "object" || obj === null) {
+                                                    // simple data type
+                                                    if (t == "string") obj = '"'+obj+'"';
+                                                    return String(obj);
+                                                }
+                                                else {
+                                                    // recurse array or object
+                                                    var n, v, json = [], arr = (obj && obj.constructor == Array);
+                                                    for (n in obj) {
+                                                        v = obj[n]; t = typeof(v);
+                                                        if (t == "string") v = '"'+v+'"';
+                                                        else if (t == "object" && v !== null) v = JSON.stringify(v);
+                                                        json.push((arr ? "" : '"' + n + '":') + String(v));
+                                                    }
+                                                    return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
+                                                }
+                                            };
+
+
+                                            function postData(url,data){
+                                                var form=document.createElement("form");
+                                                form.method="post";
+                                                form.enctype="application/x-www-form-urlencoded";
+                                                form.action=url;
+
+                                                for(var key in data){
+                                                    var kInput=document.createElement("input");
+                                                    kInput.setAttribute("name",key);
+                                                    kInput.setAttribute("value",data[key]);
+                                                    form.appendChild(kInput);
+                                                }
+                                                document.body.appendChild(form);
+                                                form.submit();
+                                                document.body.removeChild(form);
+
+                                            }
+
+                                            
+                                            //get the table header
+                                            gi_date=document.getElementById("date").innerHTML;
+                                            gi_id=document.getElementById("dbd_No").innerHTML;
+                                            gi_where=document.getElementById("sgdd_value").innerHTML;
+                                            gi_cuoshileixing=document.getElementById("sgyy_value").innerHTML;
+                                            gi_who_unit=document.getElementById("lldw_value").innerHTML;
+                                            gi_who_person=document.getElementById("llr").innerHTML.replace("领 料 人：","");
+
+
+                                            //get the rows
+                                            var $rows=document.getElementById("_subarea_kc_rkd_kc_rkd_sub_print").rows;
+                                            var $rs=[];
+                                            for(i=1;i<$rows.length;i++){
+                                                var $r=[];
+                                                if($rows[i].cells[1].innerHTML=="&nbsp; " ){
+                                                    break;
+                                                }
+                                                for(j=1;j<$rows[i].cells.length;j++){
+                                                    //alert(i+"\t"+j+"\t"+$rows[i].cells[j].innerHTML);
+                                                    c=$rows[i].cells[j].innerHTML.replace(" ","").replace("&nbsp;","");
+                                                    c=c.replace(/\\/g,"\\\\");
+                                                    c=htmlEscape(c);
+                                                    $r.push(c);
+                                                }
+                                                $rs.push($r);
+                                            }
+                                           rsString=JSON.stringify($rs);
+
+
+                                           //url="http://localhost/test/wzdb.php";
+                                           url="http://10.16.165.167/wzdb.php";
+
+                                           var  data={
+                                                gi_id:gi_id,
+                                                gi_date:gi_date,
+                                                gi_where:gi_where,
+                                                gi_cuoshileixing:gi_cuoshileixing,
+                                                gi_who_unit:gi_who_unit,
+                                                gi_who_person:gi_who_person,
+                                                rows:rsString
+                                            };
+
+                                           postData(url,data);
+
+
+                                                                 
+                                        }    
+                                </script>
+                            </table>
+
+           </body> 
+           </html>

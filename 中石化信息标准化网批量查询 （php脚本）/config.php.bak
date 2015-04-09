@@ -1,0 +1,11 @@
+<?php
+
+
+$url="http://10.5.105.211";
+$user="yourusername";
+$pass="yourpassword";
+$cookiefilepre="std";
+
+
+
+?>
